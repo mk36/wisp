@@ -36,12 +36,13 @@
 
       <a-light type="ambient" color="#FFFFFF" intensity="1.0"></a-light>
 
-
-      <a-entity id="bottom-spot-light" :position="lightColorPosition" light="type: spot; angle: 45; distance: 20; color: red; intensity: 10;"
-                :animation="lightColorAnimation"></a-entity>
-
-
       <a-sky color="black"></a-sky>
+
+      <a-entity id="moon" gltf-model="url(/models/moon.glb)"
+                position="80 30 -80" scale="6.5 6.5 6.5" rotation="0 0 0" :animation="moonAnimation">
+        <a-entity position="0.5 1.1 1.9" light="type: spot; angle: 45; distance: 20; color: yellow; intensity: 10;"
+                  :animation="lightColorAnimation"></a-entity>
+      </a-entity>
 
       <a-entity :id="characterID" gltf-model="url(/models/wisp.glb)"
                 :position="movePositions[0]" rotation="0 90 0">
@@ -50,9 +51,6 @@
         <a-entity :position="wispGlowLightPos" :light="glowLightProperties"
                   :animation="glowLightAnimation"></a-entity>
       </a-entity>
-
-<!--      <a-text color="white" position="0 1 -5" value="Start Experience" geometry="primitive:plane"></a-text>-->
-<!--      <a-plane position="0 1 -5" color="blue" height="2" width="2"></a-plane>-->
     </a-scene>
 
     <section class="start-wrapper">
@@ -72,8 +70,16 @@ export default {
       charElm: null,
       soundBg: 'sound-bg',
       // animations
-      glowLightAnimation: 'property: light.color; from:rgb(255, 255, 255); to:rgb(0, 197, 255); dir: alternate; dur: 2000; easing: easeInCirc; loop: true',
-      lightColorAnimation: 'property: light.color; from:rgb(255, 0, 0); to:rgb(186, 0, 255); dir: alternate; dur: 1000; easing: linear; loop: true',
+      glowLightAnimation: 'property: light.color; from:rgb(255, 255, 255); to:rgb(0, 0, 0); dir: alternate; dur: 1500; easing: easeInCirc; loop: true',
+      // lightColorAnimation: 'property: light.color; from:rgb(255, 0, 0); to:rgb(255, 99, 71); dir: alternate; dur: 1000; easing: linear; loop: true',
+      lightColorAnimation: 'property: light.intensity; from:1; to:10; dir: alternate; dur: 1000; easing: linear; loop: true',
+      moonAnimation: {
+        property: 'rotation',
+        to: {y: 360},
+        dur: 15000,
+        easing: 'linear',
+        loop: true,
+      },
       moveAnimation: {
         property: 'position',
         to: {x: 0, y: 0, z: 0}, // default, get overwritten
@@ -90,7 +96,7 @@ export default {
       animations: [],
       animNumber: 1,
       // object positions
-      wispGlowLightPos: {x: -13.6, y: 1.1, z: 0},
+      wispGlowLightPos: {x: -5.6, y: 1.1, z: 0},
       lightColorPosition: '0.1 1.2 -2.9',
       movePositions: [
         {x: -5.5, y: 2.9, z: -5},
