@@ -28,6 +28,8 @@ npm run build
 4. Spotlight 1: to create glow effect as a child on wisp (animating color).
    Spotlight 2: to create a pulse like effect on moon (animating intensity)
 
+Would like to have added more polish/better wisp model, but wanted to keep to the 2-3 hour time limit that I specified in the email.
+
 ### Lints and fixes files
 ```
 npm run lint
